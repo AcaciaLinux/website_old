@@ -1,38 +1,75 @@
-<html>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script>
-		async function loadData() {
-			const response = await fetch('http://localhost:8081/?get=jsonpackagelist');
-			const json_arr = await response.json();
-			
-			console.log(json_arr);
-			for (let x = 0; x < json_arr.length; x++) {
-				var tag = document.createElement("p");
-				var text = document.createTextNode("Name: " + json_arr[x].name);
-				tag.appendChild(text);
-				tag.appendChild(document.createElement('br'));
-				text = document.createTextNode("Description: " + json_arr[x].description);
-				tag.appendChild(text);
-				tag.appendChild(document.createElement('br'));
-				
-				var element = document.getElementById("shitdiv");
-				element.appendChild(tag);
-			}
-		}
-		loadData();
-		
-	</script>
-	<head>
-		<title> AcaciaLinux.org </title>
-	</head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AcaciaLinux.org - Welcome</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-light">
+        <header>
+            <!-- Navigation bar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">AcaciaLinux.org</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link fw-bold active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link fw-bold" href="#">Packages</a>
+                            <a class="nav-link fw-bold" href="#">Packagebuilds</a>
+                            <a class="nav-link fw-bold" href="#">Downloads</a>
+                            <a class="nav-link fw-bold" href="#">Branch Interface</a>
+                            <a class="nav-link fw-bold" href="#">Github</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="jumbotron">
 
-	<body>
+                <!-- landing page -->
+                <div class="px-4 p-5 text-center bg-light main_container">
+                    <img class="d-block mx-auto mb-4" src="img/tree.png" alt="" width="172" height="157">
+                    <h1 class="display-5 fw-bold">AcaciaLinux</h1>
+                    <div class="col-lg-6 mx-auto">
+                        <p class="lead mb-4">A customizable and completely selfhostable Linux distribution.</p>
+                        <button type="button" class="btn btn-dark">Learn more</button>
+                    </div>
+                </div>
 
-		<h1> AcaciaLinux.org </h1>
-		<p> Simple branch-api test </p>
-		<div id="shitdiv">
-		
+                <div class="container-fluid bg-dark">
+                    <div class="row p-5 bg-dark text-white">
+                        <div class="col-lg-4">
+                            <h2 class="fw-normal">branch</h2>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore</p>
+                            <p><a class="btn btn-light" href="#">View repository &raquo;</a></p>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2 class="fw-normal">leaf</h2>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore</p>
+                            <p><a class="btn btn-light" href="#">View repository &raquo;</a></p>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2 class="fw-normal">installer</h2>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore</p>
+                            <p><a class="btn btn-light" href="#">View repository &raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </main>
 
-	</body>
+        
 
+
+        
+
+       
+        
+    </body>
 </html>
