@@ -1,0 +1,38 @@
+<html>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		async function loadData() {
+			const response = await fetch('http://localhost:8081/?get=jsonpackagelist');
+			const json_arr = await response.json();
+			
+			console.log(json_arr);
+			for (let x = 0; x < json_arr.length; x++) {
+				var tag = document.createElement("p");
+				var text = document.createTextNode("Name: " + json_arr[x].name);
+				tag.appendChild(text);
+				tag.appendChild(document.createElement('br'));
+				text = document.createTextNode("Description: " + json_arr[x].description);
+				tag.appendChild(text);
+				tag.appendChild(document.createElement('br'));
+				
+				var element = document.getElementById("shitdiv");
+				element.appendChild(tag);
+			}
+		}
+		loadData();
+		
+	</script>
+	<head>
+		<title> AcaciaLinux.org </title>
+	</head>
+
+	<body>
+
+		<h1> AcaciaLinux.org </h1>
+		<p> Simple branch-api test </p>
+		<div id="shitdiv">
+		
+
+	</body>
+
+</html>
