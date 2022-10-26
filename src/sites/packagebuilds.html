@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        async function fetch_data() {
+            const pkgbuildlist_response = await fetch('http://localhost:8081/?get=jsonpkgbuildlist');
+			const json_pkgbuildlist_response = await pkgbuildlist_response.json();
+
+            const pkglist_response = await fetch('http://localhost:8081/?get=jsonpackagelist')
+            const json_pkglist_response = await pkglist_response.json();
+
+            console.log("Fetching jsonpackagelist from branch..");
+
+            pkg_list = Array();
+            
+            for (let i = 0; i < json_pkglist_response.length; i++) {
+                pkg_list.push(json_pkglist_response[i].name);
+            }
+
+            for (let i = 0; i < json_pkgbuildlist_response.length; i++) {
+                row = document.createElement("tr");
+
+                var id = document.createElement("td");
+                text = document.createTextNode(i);
+                id.append(text);
+
+                var name = document.createElement("td");
+                text = document.createTextNode(json_pkgbuildlist_response[i]);
+                name.appendChild(text);
+
+                var built = document.createElement("td");
+                text = null;
+
+                if(pkg_list.includes(json_pkgbuildlist_response[i])) {
+                    text = document.createTextNode("true");
+                } else {
+                    text = document.createTextNode("false");
+                }
+
+                built.appendChild(text);
+                row.append(id);
+                row.appendChild(name);
+                row.appendChild(built);
+
+                document.getElementById("table_data").appendChild(row);
+            }
+        }
+        fetch_data();
+    </script>
+
+    <body>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">package built</th>
+                </tr>
+            </thead>
+            <tbody id="table_data"></tbody>
+          </table>
+    </body>
+</html>
