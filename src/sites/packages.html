@@ -1,82 +1,81 @@
+<!DOCTYPE html>
 <html>
-    <script>
-        async function fetch_data() {
-            const response = await fetch('http://localhost:8081/?get=jsonpackagelist');
+	<script>
+		async function fetch_data() {
+			const response = await fetch('http://localhost:8081/?get=jsonpackagelist');
 			const json_response = await response.json();
 
-            console.log("Fetching jsonpackagelist from branch..");
-            console.log(json_response);
+			console.log("Fetching jsonpackagelist from branch..");
+			console.log(json_response);
 
-            for (let i = 0; i < json_response.length; i++) {
-                row = document.createElement("tr");
+			for (let i = 0; i < json_response.length; i++) {
+				row = document.createElement("tr");
 
-                var id = document.createElement("td");
-                text = document.createTextNode(i);
-                id.append(text);
+				var id = document.createElement("td");
+				text = document.createTextNode(i);
+				id.append(text);
 
+				var name = document.createElement("td");
+				text = document.createTextNode(json_response[i].name);
+				name.appendChild(text);
 
-                var name = document.createElement("td");
-                text = document.createTextNode(json_response[i].name);
-                name.appendChild(text);
+				var real_version = document.createElement("td");
+				text = document.createTextNode(json_response[i].real_version);
+				real_version.appendChild(text);
 
-                var real_version = document.createElement("td");
-                text = document.createTextNode(json_response[i].real_version);
-                real_version.appendChild(text);
+				var version = document.createElement("td");
+				text = document.createTextNode(json_response[i].version);
+				version.appendChild(text);
 
-                var version = document.createElement("td");
-                text = document.createTextNode(json_response[i].version);
-                version.appendChild(text);
+				var description = document.createElement("td");
+				text = document.createTextNode(json_response[i].description);
+				description.appendChild(text);
+				
+				var dependencies = document.createElement("td");
+				text = document.createTextNode(json_response[i].dependencies);
+				dependencies.appendChild(text);
 
-                var description = document.createElement("td");
-                text = document.createTextNode(json_response[i].description);
-                description.appendChild(text);
-                
-                var dependencies = document.createElement("td");
-                text = document.createTextNode(json_response[i].dependencies);
-                dependencies.appendChild(text);
+				//var url = document.createElement("td");
+				//text = document.createTextNode(json_response[i].url);
+				//url.appendChild(text);
 
-                //var url = document.createElement("td");
-                //text = document.createTextNode(json_response[i].url);
-                //url.appendChild(text);
+				button = document.createElement("button");
+				//href="#" role="button"
 
-                button = document.createElement("button");
-                button.setAttribute("type", "button");
-                button.classList.add("btn");
-                button.classList.add("btn-link")
-                button.setAttribute("href", "https://google.de/");
-                text = document.createTextNode("Download");
-                button.appendChild(text);
+				button.setAttribute("type", "button")
+				button.setAttribute("href", "https://google.de/");
+				button.classList.add("btn");
+				button.classList.add("btn-link")
+				text = document.createTextNode("Download");
+				button.appendChild(text);
 
-                row.append(id);
-                row.appendChild(name);
-                row.appendChild(real_version);
-                row.appendChild(version);
-                row.appendChild(description);
-                row.appendChild(dependencies);
-                row.appendChild(button);
+				row.append(id);
+				row.appendChild(name);
+				row.appendChild(real_version);
+				row.appendChild(version);
+				row.appendChild(description);
+				row.appendChild(dependencies);
+				row.appendChild(button);
 
-
-                document.getElementById("table_data").appendChild(row);
-
-            }
-        }
-        fetch_data();
-    </script>
-
-    <body>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">name</th>
-                    <th scope="col">rversion</th>
-                    <th scope="col">version</th>
-                    <th scope="col">description</th>
-                    <th scope="col">dependencies</th>
-                    <th scope="col">download</th>
-                </tr>
-            </thead>
-            <tbody id="table_data"></tbody>
-          </table>
-    </body>
+				document.getElementById("table_data").appendChild(row);
+			}
+		}
+		fetch_data();
+	</script>
+	<body>
+		<table class="table">
+			<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">name</th>
+						<th scope="col">rversion</th>
+						<th scope="col">version</th>
+						<th scope="col">description</th>
+						<th scope="col">dependencies</th>
+						<th scope="col">download</th>
+					</tr>
+				</thead>
+				<tbody id="table_data"></tbody>
+		  </table>
+	</body>
 </html>
