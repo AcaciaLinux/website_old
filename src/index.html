@@ -61,13 +61,6 @@
                     $("#download_button").addClass("active");
                     $('#content-div').load('sites/download.html');
                 });
-
-                all_buttons.push($("#branch_logon"));
-                $("#branch_logon").click(function() {
-                    disable_all_active_buttons();
-                    $("#branch_logon").addClass("active");
-                    $('#content-div').load('sites/admin.html');
-                });
             }
 
             function disable_all_active_buttons() {
@@ -93,7 +86,7 @@
                         <a class="nav-link fw-bold" href="#" id="package_button">Packages</a>
                         <a class="nav-link fw-bold" href="#" id="packagebuild_button">Packagebuilds</a>
                         <a class="nav-link fw-bold" href="#" id="download_button">Downloads</a>
-                        <a class="nav-link fw-bold" href="#" id="branch_logon">Branch Interface</a>
+                        <a class="nav-link fw-bold" href="admin/" id="branch_logon">Branch Interface</a>
                         <a class="nav-link fw-bold" href="https://github.com/AcaciaLinux/">Github</a>
                     </div>
                 </div>
