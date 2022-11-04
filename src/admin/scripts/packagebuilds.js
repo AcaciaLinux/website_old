@@ -2,44 +2,42 @@ async function fetch_data() {
 	let branchUrl = window.location.protocol + "//" + window.location.hostname + ":8081/";
 	console.log("Sending branch requests to " + branchUrl);
 
-	const pkgbuildlist_response = await fetch(branchUrl + '?get=jsonpackagebuildlist');
-	const json_pkgbuildlist_response = await pkgbuildlist_response.json();
-	
-	const pkglist_response = await fetch(branchUrl + '?get=jsonpackagelist')
-	const json_pkglist_response = await pkglist_response.json();
+	console.log("Fetching packagebuildlist from branch..");
+    wr = new WebResponse(branchUrl + '?get=jsonpackagebuildlist');
+    await wr.fetch_data();
 
-	console.log("Fetching jsonpackagelist from branch..");
+    if(wr.status != "SUCCESS") {
+        alert("Failure while attempting to fetch list.");
+        return;
+    }
 
 	pkg_list = Array();
-	
-	for (let i = 0; i < json_pkglist_response.length; i++) {
-		pkg_list.push(json_pkglist_response[i].name);
-	}
 
-	for (let i = 0; i < json_pkgbuildlist_response.length; i++) {
+	const packagebuildlist = wr.payload;
+
+	console.log(packagebuildlist.length + " package builds");
+
+	for (let i = 0; i < packagebuildlist.length; i++) {
 		row = document.createElement("tr");
 
-		var id = document.createElement("td");
-		text = document.createTextNode(i);
-		id.append(text);
+		var pkgname = document.createElement("td");
+        text = document.createTextNode(packagebuildlist[i]);
+        pkgname.append(text);
 
-		var name = document.createElement("td");
-		text = document.createTextNode(json_pkgbuildlist_response[i]);
-		name.appendChild(text);
+		var curversion = document.createElement("td");
+		text = document.createTextNode("---");
+		curversion.append(text);
 
-		var built = document.createElement("td");
-		text = null;
+		bt_edit = document.createElement("td");
+		a_edit = document.createElement("a");
+		a_edit.setAttribute("href", "https://google.de/");
+        text = document.createTextNode("Edit");
+        a_edit.appendChild(text);
+		bt_edit.appendChild(a_edit);
 
-		if(pkg_list.includes(json_pkgbuildlist_response[i])) {
-			text = document.createTextNode("true");
-		} else {
-			text = document.createTextNode("false");
-		}
-
-		built.appendChild(text);
-		row.append(id);
-		row.appendChild(name);
-		row.appendChild(built);
+		row.append(pkgname);
+		row.append(curversion);
+		row.append(bt_edit);
 
 		document.getElementById("table_data").appendChild(row);
 	}

@@ -17,7 +17,7 @@ class WebResponse {
     }
 
     async fetch_data() {
-        const webresponse = await fetch('http://localhost:8081/?get=jsonpackagelist');
+        const webresponse = await fetch(this.endpoint_url);
         const json_webresp = await webresponse.json();
 
         this.status = json_webresp["status"];
