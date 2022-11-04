@@ -2,7 +2,11 @@
 <html>
 	<script>
 		async function fetch_data() {
-			const response = await fetch('http://localhost:8081/?get=jsonpackagelist');
+			let branchUrl = window.location.origin.replace('\:*', '');
+			branchUrl += ':8080/?get=jsonpackagelist';
+			console.log("Sending: " + branchUrl);
+			//const response = await fetch('http://192.168.64.9:8081/?get=jsonpackagelist');
+			const response = await fetch(branchUrl);
 			const json_response = await response.json();
 
 			console.log("Fetching jsonpackagelist from branch..");

@@ -18,18 +18,18 @@ function register_button_events() {
 		$('#content-div').load('sites/overview.html');
 	});
 
-	all_buttons.push($("#btn_pbl"));
-	$("#btn_pbl").click(function() {
+	all_buttons.push($("#btn_pb"));
+	$("#btn_pb").click(function() {
 		disable_all_active_buttons();
-		$("#btn_pbl").addClass("active");
-		$('#content-div').load('sites/packagebuildlist.html');
+		$("#btn_pb").addClass("active");
+		$('#content-div').load('sites/packagebuilds.html');
 	});
 
 	all_buttons.push($("#btn_cl"));
 	$("#btn_cl").click(function() {
 		disable_all_active_buttons();
 		$("#btn_cl").addClass("active");
-		$('#content-div').load('sites/clientlist.html');
+		$('#content-div').load('sites/clients.html');
 	});
 
 	all_buttons.push($("#btn_jobs"));
