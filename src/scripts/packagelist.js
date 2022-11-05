@@ -1,6 +1,6 @@
 async function fetch_data() {
     console.log("Fetching jsonpackagelist from branch..");
-    wr = new WebResponse(getBranchAPIURL());
+    wr = new WebResponse(getBranchAPIURL() + '?get=jsonpackagelist');
     await wr.fetch_data();
 
     if(wr.status != "SUCCESS") {
@@ -8,7 +8,7 @@ async function fetch_data() {
         return;
     }
 
-    pkglist = JSON.parse(wr.payload);
+    pkglist = wr.payload;
 
     for (let i = 0; i < pkglist.length; i++) {
         row = document.createElement("tr");

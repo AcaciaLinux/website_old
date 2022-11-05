@@ -1,3 +1,3 @@
 function getBranchAPIURL(){
-	return "api.acacialinux.org";
+	return "https://api.acacialinux.org/";
 }
