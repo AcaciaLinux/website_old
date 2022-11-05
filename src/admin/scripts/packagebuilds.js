@@ -3,19 +3,32 @@ async function fetch_data() {
 	console.log("Sending branch requests to " + branchUrl);
 
 	console.log("Fetching packagebuildlist from branch..");
-    wr = new WebResponse(branchUrl + '?get=jsonpackagebuildlist');
-    await wr.fetch_data();
+    wr_pkgbuildlist = new WebResponse(branchUrl + '?get=jsonpackagebuildlist');
+    await wr_pkgbuildlist.fetch_data();
+	if(wr_pkgbuildlist.status != "SUCCESS") {
+        alert("Failure while attempting to fetch list.");
+        return;
+    }
 
-    if(wr.status != "SUCCESS") {
+	console.log("Fetching packaglist from branch..");
+    wr_pkglist = new WebResponse(branchUrl + '?get=jsonpackagelist');
+    await wr_pkglist.fetch_data();
+	if(wr_pkglist.status != "SUCCESS") {
         alert("Failure while attempting to fetch list.");
         return;
     }
 
 	pkg_list = Array();
 
-	const packagebuildlist = wr.payload;
+	const packagebuildlist = wr_pkgbuildlist.payload;
+	const packagelist = wr_pkglist.payload;
+	pkglist = Array();
+    for (let i = 0; i < packagelist.length; i++) {
+        pkglist.push(packagelist[i].name);
+    }
 
 	console.log(packagebuildlist.length + " package builds");
+	console.log(packagelist.length + " packages");
 
 	for (let i = 0; i < packagebuildlist.length; i++) {
 		row = document.createElement("tr");
@@ -25,8 +38,24 @@ async function fetch_data() {
         pkgname.append(text);
 
 		var curversion = document.createElement("td");
-		text = document.createTextNode("---");
+		curversion.classList.add("pb_curversion");
+		if(pkglist.includes(packagebuildlist[i])) {
+			index = pkglist.indexOf(packagebuildlist[i])
+            text = document.createTextNode(packagelist[index].version);
+        } else {
+            text = document.createTextNode("-");
+        }
 		curversion.append(text);
+
+		var currelversion = document.createElement("td");
+		currelversion.classList.add("pb_currelversion");
+		if(pkglist.includes(packagebuildlist[i])) {
+			index = pkglist.indexOf(packagebuildlist[i])
+            text = document.createTextNode(packagelist[index].real_version);
+        } else {
+            text = document.createTextNode("-");
+        }
+		currelversion.append(text);
 
 		bt_edit = document.createElement("td");
 		a_edit = document.createElement("a");
@@ -37,6 +66,7 @@ async function fetch_data() {
 
 		row.append(pkgname);
 		row.append(curversion);
+		row.append(currelversion);
 		row.append(bt_edit);
 
 		document.getElementById("table_data").appendChild(row);
