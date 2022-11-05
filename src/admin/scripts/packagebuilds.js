@@ -59,7 +59,7 @@ async function fetch_data() {
 
 		bt_edit = document.createElement("td");
 		a_edit = document.createElement("a");
-		a_edit.setAttribute("href", "https://google.de/");
+		a_edit.setAttribute("href", "javascript:f_edit(\"" + packagebuildlist[i] + "\");");
         text = document.createTextNode("Edit");
         a_edit.appendChild(text);
 		bt_edit.appendChild(a_edit);
@@ -72,4 +72,10 @@ async function fetch_data() {
 		document.getElementById("table_data").appendChild(row);
 	}
 }
+
+function f_edit(str){
+	cur_pkgbuild = str;
+	show_page("#btn_editor", "sites/editor.html");
+}
+
 fetch_data();
