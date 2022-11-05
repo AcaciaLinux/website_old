@@ -1,5 +1,5 @@
 async function fetch_data() {
-	let branchUrl = window.location.protocol + "//" + window.location.hostname + ":8081/";
+	let branchUrl = getBranchAPIURL();
 	console.log("Sending branch requests to " + branchUrl);
 
 	console.log("Fetching packagebuildlist from branch..");

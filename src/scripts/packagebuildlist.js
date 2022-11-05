@@ -1,6 +1,6 @@
 async function fetch_data() {
     console.log("Fetching jsonpackagelist from branch..");
-    wr = new WebResponse('http://localhost:8081/?get=jsonpackagelist');
+    wr = new WebResponse(getBranchAPIURL());
     await wr.fetch_data();
 
     if(wr.status != "SUCCESS") {
@@ -14,7 +14,7 @@ async function fetch_data() {
         pkglist.push(jpkglist[i].name);
     }
 
-    wr = new WebResponse('http://localhost:8081/?get=jsonpackagebuildlist');
+    wr = new WebResponse(getBranchAPIURL());
     await wr.fetch_data();
 
     if(wr.status != "SUCCESS") {
