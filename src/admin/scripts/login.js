@@ -19,6 +19,7 @@ $(document).ready(function(){
 				}
 
 				cur_authkey = res.payload;
+				setCookie("branch_authkey", cur_authkey, 1);
 				console.debug("New authkey: " + cur_authkey);
 				show_page("#btn_overview", "sites/overview.html");
 		});
