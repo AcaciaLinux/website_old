@@ -6,15 +6,8 @@ var cur_authkey = "";
 $(document).ready(function() {
 	console.log("HELO");
 	console.log("Registering button events..");
-	$('#btn_overview').addClass("active");
-	$('#content-div').load('sites/overview.html');
 	register_button_events($("#content-div"));
-
-	if (cur_authkey == ""){
-		$("#btn_auth").text("Login");
-	} else {
-		$("#btn_auth").text("Logout");
-	}
+	show_page("#btn_overview", "sites/overview.html");
 });
 
 async function show_page(btn, source_file){
@@ -22,12 +15,18 @@ async function show_page(btn, source_file){
 	disable_all_active_buttons();
 	$(btn).addClass("active");
 	$('#content-div').load(source_file);
+
+	if (cur_authkey == ""){
+		$("#btn_auth").text("Login");
+	} else {
+		$("#btn_auth").text("Logout");
+	}
 }
 
 function register_button_events() {
 	all_buttons.push($("#btn_overview"));
 	$("#btn_overview").click(function() {
-		show_page("#btn_overview", "sites/overview.html")
+		show_page("#btn_overview", "sites/overview.html");
 	});
 
 	all_buttons.push($("#btn_pb"));
@@ -54,6 +53,21 @@ function register_button_events() {
 	$("#btn_auth").click(function() {
 		if (cur_authkey == ""){
 			show_page("#btn_auth", "sites/login.html");
+		} else {
+			$.post(getBranchAPIURL() + "logoff", {
+				authkey: cur_authkey
+			},
+				function(plain_res){
+					const res = jQuery.parseJSON(plain_res);
+	
+					if(res.status != "SUCCESS") {
+						alert("Failure while attempting to log off: " + res.payload);
+						return;
+					}
+	
+					cur_authkey = "";
+					show_page("#btn_overview", "sites/overview.html");
+			});
 		}
 	});
 }
