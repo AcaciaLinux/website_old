@@ -1,5 +1,6 @@
 var all_buttons = Array()
 var cur_pkgbuild = "";
+var cur_authkey = "";
 
 //load overview
 $(document).ready(function() {
@@ -8,6 +9,12 @@ $(document).ready(function() {
 	$('#btn_overview').addClass("active");
 	$('#content-div').load('sites/overview.html');
 	register_button_events($("#content-div"));
+
+	if (cur_authkey == ""){
+		$("#btn_auth").text("Login");
+	} else {
+		$("#btn_auth").text("Logout");
+	}
 });
 
 async function show_page(btn, source_file){
@@ -42,6 +49,13 @@ function register_button_events() {
 	$("#btn_editor").click(function() {
 		show_page("#btn_editor", "sites/editor.html");
 	});
+
+	all_buttons.push($("#btn_auth"));
+	$("#btn_auth").click(function() {
+		if (cur_authkey == ""){
+			show_page("#btn_auth", "sites/login.html");
+		}
+	});
 }
 
 function disable_all_active_buttons() {
@@ -51,3 +65,5 @@ function disable_all_active_buttons() {
 		}
 	}
 }
+
+

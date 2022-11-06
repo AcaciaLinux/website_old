@@ -2,10 +2,26 @@
 <html>
 	<script src="scripts/editor.js"></script>
 
-    <body>
-		<h2 id="pkgbuild_name"></h2>
-		<div class="form-outline w-90" style="height: 90%;">
-			<textarea class="h-100 w-100" id="textAreaExample4" rows="3"></textarea>
+    <body style="height: 100%;">
+		<table>
+			<tr>
+				<td style="width: 100%;">
+					<h2 id="pkgbuild_name"></h2>
+				</td>
+				<td>
+					<button type="button" class="btn btn-primary" disabled>Crossbuild</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn-primary">Releasebuild</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn-primary" onclick="submit_pkgbuild()">Submit</button>
+				</td>
+			</tr>
+		</table>
+		
+		<div class="form-outline w-90" style="flex: 1; margin-bottom: 10px">
+			<textarea class="h-100 w-100" id="ta_code" rows="3"></textarea>
 		</div>
 	</body>
 </html>

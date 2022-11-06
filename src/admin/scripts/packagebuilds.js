@@ -3,18 +3,18 @@ async function fetch_data() {
 	console.log("Sending branch requests to " + branchUrl);
 
 	console.log("Fetching packagebuildlist from branch..");
-    wr_pkgbuildlist = new WebResponse(branchUrl + '?get=jsonpackagebuildlist');
+    wr_pkgbuildlist = new WebResponse(branchUrl + '?get=packagebuildlist');
     await wr_pkgbuildlist.fetch_data();
 	if(wr_pkgbuildlist.status != "SUCCESS") {
-        alert("Failure while attempting to fetch list.");
+        alert("Failure while attempting to fetch list: " + wr_pkgbuildlist.payload);
         return;
     }
 
 	console.log("Fetching packaglist from branch..");
-    wr_pkglist = new WebResponse(branchUrl + '?get=jsonpackagelist');
+    wr_pkglist = new WebResponse(branchUrl + '?get=packagelist');
     await wr_pkglist.fetch_data();
 	if(wr_pkglist.status != "SUCCESS") {
-        alert("Failure while attempting to fetch list.");
+        alert("Failure while attempting to fetch list: " + wr_pkglist.payload);
         return;
     }
 
