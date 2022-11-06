@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<script src="scripts/editor.js"></script>
-
     <body style="height: 100%;">
 		<table>
 			<tr>
@@ -9,13 +8,13 @@
 					<h2 id="pkgbuild_name"></h2>
 				</td>
 				<td>
-					<button type="button" class="btn btn-primary" disabled>Crossbuild</button>
+					<button type="button" class="btn btn-primary" id="btn_crossbuild">Crossbuild</button>
 				</td>
 				<td>
-					<button type="button" class="btn btn-primary">Releasebuild</button>
+					<button type="button" class="btn btn-primary" id="btn_releasebuild">Releasebuild</button>
 				</td>
 				<td>
-					<button type="button" class="btn btn-primary" onclick="submit_pkgbuild()">Submit</button>
+					<button type="button" class="btn btn-primary" id="btn_submit">Submit</button>
 				</td>
 			</tr>
 		</table>
