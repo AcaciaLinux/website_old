@@ -3,8 +3,11 @@ var cur_pkgbuild = "";
 var cur_authkey = "";
 
 //load overview
-$(document).ready(function() {
+$(document).ready(async function() {
 	console.log("HELO");
+
+	await branch_check_auth();
+
 	console.log("Registering button events..");
 	register_button_events($("#content-div"));
 	show_page("#btn_overview", "sites/overview.html");
@@ -66,6 +69,7 @@ function register_button_events() {
 					}
 	
 					cur_authkey = "";
+					rmCookie("branch_authkey");
 					show_page("#btn_overview", "sites/overview.html");
 			});
 		}
