@@ -53,6 +53,22 @@ function branch_releasebuild(pkgname){
 	});
 }
 
+function branch_get_log(jobID){
+	$.post(getBranchAPIURL() + "viewlog", {
+		authkey: cur_authkey,
+		jobid: jobID},
+		function(plain_res){
+			const res = jQuery.parseJSON(plain_res);
+
+			if(res.status != "SUCCESS") {
+				alert("Failed to get build log build: " + res.payload);
+				return;
+			}
+
+			return res.payload;
+	});
+}
+
 async function branch_check_auth(){
 	let oldkey = getCookie("branch_authkey");
 	if (oldkey){
