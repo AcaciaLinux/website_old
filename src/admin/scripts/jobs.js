@@ -104,9 +104,16 @@ async function f_viewLog(jobID){
 		return;
 	}
 
+	//Convert the array of lines to a string with <br> as newline
+	var logString = ""
+	log.payload.forEach(function(line){
+		console.debug("line: '" + line + "'");
+		logString += line + " <br> ";
+	});
+
 	//Set the content and title for the modal dialog
-	$("#modal_body").text(log.payload);
 	$("#staticBackdropLabel").text("Build log for " + jobID)
+	$('<p>' + logString + '</p>').appendTo("#modal_body");
 
 	//Create a new instance of the modal dialog and show it
 	var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
