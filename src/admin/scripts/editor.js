@@ -2,6 +2,7 @@
 $(document).ready(function() {
 	console.log("Editor loading started...");
 	$("#pkgbuild_name").text(cur_pkgbuild);
+	$(".alert").hide();
 
 	if (cur_pkgbuild == ""){
 		console.log("Redirecting to select package build...");
@@ -23,22 +24,32 @@ function check_enable_buttons(){
 }
 
 function buttons_add_commands(){
-	$("#btn_crossbuild").click(function(){
+	$("#btn_crossbuild").click(async function(){
 		console.log("Submitting package build and making a crossbuild");
 		branch_submit_pkgbuild($("#ta_code").val());
-		branch_crossbuild(cur_pkgbuild)
+		if ((await branch_crossbuild(cur_pkgbuild)).status == "SUCCESS"){
+			show_alert_done();
+		}
 	});
 	
-	$("#btn_releasebuild").click(function(){
+	$("#btn_releasebuild").click(async function(){
 		console.log("Submitting package build and making a releasebuild");
 		branch_submit_pkgbuild($("#ta_code").val());
-		branch_releasebuild(cur_pkgbuild)
+		if ((await branch_releasebuild(cur_pkgbuild)).status == "SUCCESS"){
+			show_alert_done();
+		}
 	});
 
-	$("#btn_submit").click(function(){
+	$("#btn_submit").click(async function(){
 		console.log("Submitting package build...");
-		branch_submit_pkgbuild($("#ta_code").val());
+		if ((await branch_submit_pkgbuild($("#ta_code").val())).status == "SUCCESS"){
+			show_alert_done();
+		}
 	});
+}
+
+function show_alert_done(){
+	$("#alert-success").slideDown(200).fadeTo(3000, 500).slideUp(500);
 }
 
 function ta_enable_tab(){
