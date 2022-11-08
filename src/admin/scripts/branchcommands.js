@@ -53,8 +53,8 @@ function branch_releasebuild(pkgname){
 	});
 }
 
-function branch_get_log(jobID){
-	$.post(getBranchAPIURL() + "viewlog", {
+async function branch_get_log(jobID){
+	return await $.post(getBranchAPIURL() + "viewlog", {
 		authkey: cur_authkey,
 		jobid: jobID},
 		function(plain_res){
