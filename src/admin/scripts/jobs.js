@@ -10,10 +10,12 @@ function createRow(curJob, view_log){
 	jobID.append(text);
 
 	var requester = document.createElement("td");
+	requester.classList.add("jb_requester");
 	text = document.createTextNode(curJob.requesting_client);
 	requester.append(text);
 
 	var status = document.createElement("td");
+	status.classList.add("jb_status");
 	text = document.createTextNode(curJob.job_status);
 	status.append(text);
 
@@ -30,6 +32,7 @@ function createRow(curJob, view_log){
 		text = document.createTextNode("-");
 		td_log.append(text);
 	}
+	td_log.classList.add("jb_log");
 	
 
 	row.append(pkgname);

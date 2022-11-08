@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <script src="scripts/jobs.js"></script>
+    <link rel="stylesheet" href="css/jobs.css">
     <body>
         <h1>Recent builds and jobs</h1>
         <hr>
@@ -9,9 +10,9 @@
                 <tr>
                     <th>Package name</th>
                     <th>Job ID</th>
-                    <th>Requester</th>
-                    <th>Status</th>
-                    <th>Log</th>
+                    <th class="jb_requester">Requester</th>
+                    <th class="jb_status">Status</th>
+                    <th class="jb_log">Log</th>
                 </tr>
             </thead>
             <tbody id="jobs_data"></tbody>
