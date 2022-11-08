@@ -95,9 +95,10 @@ async function fetch_data() {
 	}
 }
 
-function f_viewLog(jobID){
+async function f_viewLog(jobID){
 	console.log("Displaying Log for jobID " + jobID);
-	console.log(branch_get_log(jobID));
+	log = await branch_get_log(jobID);
+	console.log(log);
 }
 
 fetch_data();
