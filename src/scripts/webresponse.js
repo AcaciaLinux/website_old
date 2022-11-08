@@ -16,6 +16,17 @@ class WebResponse {
         return this.response_code;
     }
 
+    static from_string(string) {
+        var resp = new WebResponse("");        
+        var json_string = jQuery.parseJSON(string);
+
+        resp.status = json_string["status"];
+        resp.response_code = json_string["response_code"];
+        resp.payload = json_string["payload"]; 
+
+        return resp;
+    }
+
     async fetch_data() {
         console.debug("[WebRequest] Sending request: \"" + this.endpoint_url + "\"");
         const webresponse = await fetch(this.endpoint_url);
