@@ -98,7 +98,21 @@ async function fetch_data() {
 async function f_viewLog(jobID){
 	console.log("Displaying Log for jobID " + jobID);
 	log = await branch_get_log(jobID);
-	console.log(log);
+
+	//If we have no log to show, error out
+	if (log.status != "SUCCESS"){
+		return;
+	}
+
+	//Set the content and title for the modal dialog
+	$("#modal_body").text(log.payload);
+	$("#staticBackdropLabel").text("Build log for " + jobID)
+
+	//Create a new instance of the modal dialog and show it
+	var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
+		keyboard: false
+	});
+	modal.show();
 }
 
 fetch_data();
