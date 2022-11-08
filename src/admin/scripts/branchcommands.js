@@ -1,5 +1,5 @@
-function branch_submit_pkgbuild(pkgbuild){
-	$.post(getBranchAPIURL() + "submitpackagebuild", {
+async function branch_submit_pkgbuild(pkgbuild){
+	return WebResponse.from_string(await $.post(getBranchAPIURL() + "submitpackagebuild", {
 		authkey: cur_authkey,
 		packagebuild: pkgbuild},
 		function(plain_res){
@@ -9,11 +9,11 @@ function branch_submit_pkgbuild(pkgbuild){
 				alert("Failed to submit package build: " + res.payload);
 				return;
 			}
-	});
+	}));
 }
 
-function branch_crossbuild(pkgname){
-	$.post(getBranchAPIURL() + "crossbuild", {
+async function branch_crossbuild(pkgname){
+	return WebResponse.from_string(await $.post(getBranchAPIURL() + "crossbuild", {
 		authkey: cur_authkey,
 		pkgname: pkgname},
 		function(plain_res){
@@ -23,11 +23,11 @@ function branch_crossbuild(pkgname){
 				alert("Failed to submit package build: " + res.payload);
 				return;
 			}
-	});
+	}));
 }
 
-function branch_clear_completed_jobs(){
-	$.post(getBranchAPIURL() + "clearcompletedjobs", {
+async function branch_clear_completed_jobs(){
+	return WebResponse.from_string(await $.post(getBranchAPIURL() + "clearcompletedjobs", {
 		authkey: cur_authkey},
 		function(plain_res){
 			const res = jQuery.parseJSON(plain_res);
@@ -36,11 +36,11 @@ function branch_clear_completed_jobs(){
 				alert("Failed to clear completed jobs: " + res.payload);
 				return;
 			}
-	});
+	}));
 }
 
-function branch_releasebuild(pkgname){
-	$.post(getBranchAPIURL() + "releasebuild", {
+async function branch_releasebuild(pkgname){
+	return WebResponse.from_string(await $.post(getBranchAPIURL() + "releasebuild", {
 		authkey: cur_authkey,
 		pkgname: pkgname},
 		function(plain_res){
@@ -50,7 +50,7 @@ function branch_releasebuild(pkgname){
 				alert("Failed to submit package build: " + res.payload);
 				return;
 			}
-	});
+	}));
 }
 
 async function branch_get_log(jobID){
