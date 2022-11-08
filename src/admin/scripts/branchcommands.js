@@ -54,19 +54,18 @@ function branch_releasebuild(pkgname){
 }
 
 async function branch_get_log(jobID){
-	return await $.post(getBranchAPIURL() + "viewlog", {
+	return WebResponse.from_string(await $.post(getBranchAPIURL() + "viewlog", {
 		authkey: cur_authkey,
 		jobid: jobID},
 		function(plain_res){
-			const res = jQuery.parseJSON(plain_res);
+			res = WebResponse.from_string(plain_res);
 
 			if(res.status != "SUCCESS") {
-				alert("Failed to get build log build: " + res.payload);
+				alert("Failed to get build log: " + res.payload);
+				console.error("Failed to retrieve build log: " + res.payload);
 				return;
 			}
-
-			return res.payload;
-	});
+	}));
 }
 
 async function branch_check_auth(){
