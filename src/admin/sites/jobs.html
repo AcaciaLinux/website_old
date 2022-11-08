@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <script src="scripts/jobs.js"></script>
-
     <body>
         <h1>Recent builds and jobs</h1>
         <hr>
@@ -17,5 +16,20 @@
             </thead>
             <tbody id="jobs_data"></tbody>
         </table>
+
+        <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" id="modal_dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Build Log</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modal_body">Build log</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+          </div>
     </body>
 </html>
