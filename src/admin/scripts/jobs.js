@@ -21,13 +21,13 @@ function createRow(curJob, view_log){
 	if (view_log){
 		td_log = document.createElement("td");
 		a_log = document.createElement("a");
-		a_log.setAttribute("href", "https://google.de/");
-		text = document.createTextNode("View log");
-		a_log.appendChild(text);
-		td_log.appendChild(a_log);
+		a_log.setAttribute("href", "javascript:f_viewLog(\"" + curJob + "\");");
+        text = document.createTextNode("View Log");
+        a_log.appendChild(text);
+		td_log.append(a_log);
 	} else {
 		td_log = document.createElement("td");
-		text = document.createTextNode("---");
+		text = document.createTextNode("-");
 		td_log.append(text);
 	}
 	
@@ -94,4 +94,10 @@ async function fetch_data() {
 		document.getElementById("jobs_data").appendChild(createRow(curJob, true));
 	}
 }
+
+function f_viewLog(jobID){
+	console.log("Displaying Log for jobID " + jobID);
+	console.log(branch_get_log(jobID));
+}
+
 fetch_data();
