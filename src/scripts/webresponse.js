@@ -17,6 +17,7 @@ class WebResponse {
     }
 
     static from_string(string) {
+        console.debug("[WebRequest] Constructing from string \"" + string + "\"");
         var resp = new WebResponse("");        
         var json_string = jQuery.parseJSON(string);
 
