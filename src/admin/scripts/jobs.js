@@ -21,7 +21,7 @@ function createRow(curJob, view_log){
 	if (view_log){
 		td_log = document.createElement("td");
 		a_log = document.createElement("a");
-		a_log.setAttribute("href", "javascript:f_viewLog(\"" + curJob + "\");");
+		a_log.setAttribute("href", "javascript:f_viewLog(\"" + curJob.job_id + "\");");
         text = document.createTextNode("View Log");
         a_log.appendChild(text);
 		td_log.append(a_log);
