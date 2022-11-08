@@ -1,6 +1,6 @@
 async function fetch_data() {
     console.log("Fetching jsonpackagelist from branch..");
-    wr = new WebResponse(getBranchAPIURL() + '?get=jsonpackagelist');
+    wr = new WebResponse(getBranchAPIURL() + '?get=packagelist');
     await wr.fetch_data();
 
     if(wr.status != "SUCCESS") {
@@ -37,19 +37,10 @@ async function fetch_data() {
         text = document.createTextNode(pkglist[i].dependencies);
         dependencies.appendChild(text);
 
-        //var url = document.createElement("td");
-        //text = document.createTextNode(pkglist[i].url);
-        //url.appendChild(text);
-
-        button = document.createElement("button");
-        //href="#" role="button"
-
-        button.setAttribute("type", "button")
-        button.setAttribute("href", "https://google.de/");
-        button.classList.add("btn");
-        button.classList.add("btn-link")
+        dl_link = document.createElement("a");
+		dl_link.setAttribute("href", "https://api.acacialinux.org/?get=package&pkgname=" + pkglist[i].name);
         text = document.createTextNode("Download");
-        button.appendChild(text);
+        dl_link.appendChild(text);
 
         row.append(id);
         row.appendChild(name);
@@ -57,10 +48,17 @@ async function fetch_data() {
         row.appendChild(version);
         row.appendChild(description);
         row.appendChild(dependencies);
-        row.appendChild(button);
+        row.appendChild(dl_link);
 
         document.getElementById("table_data").appendChild(row);
     }
+}
+
+// this function fetches a file by redirecting an iframe to it
+function fetch_file(id, pkgname) 
+{
+    var ifrm = document.getElementById(id);
+    ifrm.src = "?get=" + path;
 }
 
 //main:

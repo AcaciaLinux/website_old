@@ -1,6 +1,6 @@
 async function fetch_data() {
-    console.log("Fetching jsonpackagelist from branch..");
-    wr = new WebResponse(getBranchAPIURL() + '?get=jsonpackagelist');
+    console.log("Fetching packagelist from branch..");
+    wr = new WebResponse(getBranchAPIURL() + '?get=packagelist');
     await wr.fetch_data();
 
     if(wr.status != "SUCCESS") {
@@ -8,13 +8,16 @@ async function fetch_data() {
         return;
     }
 
-    jpkglist = wr.payload;
+
     pkglist = Array();
-    for (let i = 0; i < jpkglist.length; i++) {
-        pkglist.push(jpkglist[i].name);
+
+    for(let i = 0; i < wr.payload.length; i++) {
+        pkglist.push(wr.payload[i].name);
     }
 
-    wr = new WebResponse(getBranchAPIURL() + '?get=jsonpackagebuildlist');
+    console.log(pkglist);
+
+    wr = new WebResponse(getBranchAPIURL() + '?get=packagebuildlist');
     await wr.fetch_data();
 
     if(wr.status != "SUCCESS") {
@@ -22,9 +25,12 @@ async function fetch_data() {
         return;
     }
 
-    jpkgbuildlist = wr.payload;
+    pkgbuildlist = wr.payload;
+    console.log("Fetching packagebuildlist from branch..");
+    console.log(pkgbuildlist);
 
-    for (let i = 0; i < jpkgbuildlist.length; i++) {
+
+    for (let i = 0; i < pkgbuildlist.length; i++) {
         row = document.createElement("tr");
 
         var id = document.createElement("td");
@@ -32,13 +38,13 @@ async function fetch_data() {
         id.append(text);
 
         var name = document.createElement("td");
-        text = document.createTextNode(jpkgbuildlist[i]);
+        text = document.createTextNode(pkgbuildlist[i]);
         name.appendChild(text);
 
         var built = document.createElement("td");
         text = null;
 
-        if(pkglist.includes(jpkgbuildlist[i])) {
+        if(pkglist.includes(pkgbuildlist[i])) {
             text = document.createTextNode("true");
         } else {
             text = document.createTextNode("false");
