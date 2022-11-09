@@ -116,6 +116,7 @@ async function f_viewLog(jobID){
 
 	//Set the content and title for the modal dialog
 	$("#staticBackdropLabel").text("Build log for " + jobID)
+	$("#modal_body").empty();
 	$('<p>' + logString + '</p>').appendTo("#modal_body");
 
 	//Create a new instance of the modal dialog and show it
