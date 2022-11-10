@@ -10,3 +10,7 @@
 	margin-left: 20px;
 	margin-right: 20px;
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .active{
+    background-color: rgb(18, 100, 18) !important;
+}
