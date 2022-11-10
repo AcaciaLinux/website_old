@@ -60,21 +60,12 @@ function createBreakerRow(text){
 }
 
 async function fetch_data() {
-	let branchUrl = getBranchAPIURL();
-	console.log("Sending branch requests to " + branchUrl);
-
-	console.log("Fetching joblist from branch..");
-    wr = new WebResponse(branchUrl + '?get=joblist');
-    await wr.fetch_data();
-
-    if(wr.status != "SUCCESS") {
-        alert("Failure while attempting to fetch list.");
-        return;
-    }
+	const joblist = await branch_g_get_joblist();
+	if (joblist == null){
+		return;
+	}
 
 	pkg_list = Array();
-
-	const joblist = wr.payload;
 
 	console.log(joblist.queued_jobs.length + " queued jobs");
 	document.getElementById("jobs_data").appendChild(createBreakerRow("Queued Jobs (" + joblist.queued_jobs.length + ")"));
