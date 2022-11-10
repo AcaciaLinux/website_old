@@ -6,7 +6,17 @@ var cur_authkey = "";
 $(document).ready(async function() {
 	console.log("HELO");
 
-	await branch_check_auth();
+	//Register a listener for the update of login state
+	window.addEventListener("LoginStateChanged", function(){
+		update_login();
+	});
+
+	//Check if the user is still authenticated
+	branch_check_auth();
+
+	//Update the login state
+	//var evt = new CustomEvent("LoginStateChanged");
+	//window.dispatchEvent(evt);
 
 	console.log("Registering button events..");
 	register_button_events($("#content-div"));
@@ -18,7 +28,9 @@ async function show_page(btn, source_file){
 	disable_all_active_buttons();
 	$(btn).addClass("active");
 	$('#content-div').load(source_file);
+}
 
+function update_login(){
 	if (cur_authkey == ""){
 		$("#btn_auth").text("Login");
 	} else {
@@ -53,13 +65,15 @@ function register_button_events() {
 	});
 
 	all_buttons.push($("#btn_auth"));
-	$("#btn_auth").click(function() {
+	$("#btn_auth").click(function() {		
 		if (cur_authkey == ""){
-			show_page("#btn_auth", "sites/login.html");
+			var modal = new bootstrap.Modal(document.getElementById('modal_login_bd'), {
+				keyboard: false
+			});
+			modal.show();
 		} else {
-			$.post(getBranchAPIURL() + "logoff", {
-				authkey: cur_authkey
-			},
+			$.post(getBranchAPIURL() + "logoff", 
+				{authkey: cur_authkey},
 				function(plain_res){
 					const res = jQuery.parseJSON(plain_res);
 	
@@ -70,7 +84,8 @@ function register_button_events() {
 	
 					cur_authkey = "";
 					rmCookie("branch_authkey");
-					show_page("#btn_overview", "sites/overview.html");
+					var evt = new CustomEvent("LoginStateChanged");
+					window.dispatchEvent(evt);
 			});
 		}
 	});
