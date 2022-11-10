@@ -75,16 +75,10 @@ function ta_enable_tab(){
 }
 
 async function load_pkgbuild(pkgname){
-	let branchUrl = getBranchAPIURL();
-	console.log("Sending branch requests to " + branchUrl);
+	pkgbuild = await branch_g_get_pkgbuild(pkgname);
+	if (pkgbuild == null){
+		return;
+	}
 
-	console.log("Fetching packagebuild from branch..");
-    wr_pkgbuild = new WebResponse(branchUrl + '?get=packagebuild&pkgname=' + pkgname);
-    await wr_pkgbuild.fetch_data();
-	if(wr_pkgbuild.status != "SUCCESS") {
-        alert("Failure while attempting to fetch package build for " + pkgname + ": " + wr_pkgbuild.payload);
-        return;
-    }
-
-	$("#ta_code").text(wr_pkgbuild.payload);
+	$("#ta_code").text(pkgbuild);
 }
