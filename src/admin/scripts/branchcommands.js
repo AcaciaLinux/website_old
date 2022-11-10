@@ -106,6 +106,16 @@ async function branch_g_get_packagelist(){
 	return branch_try_fetch(w);
 }
 
+async function branch_g_get_pkgbuild(pkgname){
+	w = new WebResponse(getBranchAPIURL() + "?get=packagebuild&pkgname=" + pkgname);
+	return branch_try_fetch(w);
+}
+
+async function branch_g_get_joblist(){
+	w = new WebResponse(getBranchAPIURL() + "?get=joblist");
+	return branch_try_fetch(w);
+}
+
 async function branch_try_fetch(webresponse){
 	await webresponse.fetch_data();
 
