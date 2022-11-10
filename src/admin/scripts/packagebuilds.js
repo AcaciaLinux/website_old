@@ -1,27 +1,18 @@
 async function fetch_data() {
-	let branchUrl = getBranchAPIURL();
-	console.log("Sending branch requests to " + branchUrl);
+	//Fetch packagebuildlist	
+	const packagebuildlist = await branch_g_get_packagebuildlist();
+	if (packagebuildlist == null){
+		return;
+	}
 
-	console.log("Fetching packagebuildlist from branch..");
-    wr_pkgbuildlist = new WebResponse(branchUrl + '?get=packagebuildlist');
-    await wr_pkgbuildlist.fetch_data();
-	if(wr_pkgbuildlist.status != "SUCCESS") {
-        alert("Failure while attempting to fetch list: " + wr_pkgbuildlist.payload);
-        return;
-    }
-
-	console.log("Fetching packaglist from branch..");
-    wr_pkglist = new WebResponse(branchUrl + '?get=packagelist');
-    await wr_pkglist.fetch_data();
-	if(wr_pkglist.status != "SUCCESS") {
-        alert("Failure while attempting to fetch list: " + wr_pkglist.payload);
-        return;
-    }
+	//Fetch packagelist
+	const packagelist = await branch_g_get_packagelist();
+	if (packagelist == null){
+		return;
+	}
 
 	pkg_list = Array();
 
-	const packagebuildlist = wr_pkgbuildlist.payload;
-	const packagelist = wr_pkglist.payload;
 	pkglist = Array();
     for (let i = 0; i < packagelist.length; i++) {
         pkglist.push(packagelist[i].name);
