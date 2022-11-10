@@ -95,3 +95,28 @@ async function branch_check_auth(){
 	var evt = new CustomEvent("LoginStateChanged");
 	window.dispatchEvent(evt);
 }
+
+async function branch_g_get_packagebuildlist(){
+	w = new WebResponse(getBranchAPIURL() + "?get=packagebuildlist");
+	return branch_try_fetch(w);
+}
+
+async function branch_g_get_packagelist(){
+	w = new WebResponse(getBranchAPIURL() + "?get=packagelist");
+	return branch_try_fetch(w);
+}
+
+async function branch_try_fetch(webresponse){
+	await webresponse.fetch_data();
+
+	if(webresponse.status != "SUCCESS") {
+        branch_api_error(webresponse.payload);
+        return null;
+    }
+
+	return webresponse.payload;
+}
+
+function branch_api_error(text){
+	alert("[Branch API]: " + text);
+}
