@@ -4,6 +4,10 @@ $(document).ready(function() {
 	$("#pkgbuild_name").text(cur_pkgbuild);
 	$(".alert").hide();
 
+	window.addEventListener("LoginStateChanged", function(){
+		check_enable_buttons();
+	});
+
 	if (cur_pkgbuild == ""){
 		console.log("Redirecting to select package build...");
 		show_page("#btn_pb", "sites/packagebuilds.html");
