@@ -1,0 +1,15 @@
+#div_chart_built{
+	width: 25%;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+#div_chart_jobs{
+	width: 25%;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+#table_overview{
+	flex: 1;
+}
