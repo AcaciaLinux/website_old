@@ -90,4 +90,8 @@ async function branch_check_auth(){
 				console.debug("Old authkey is invalid: " + res.payload);
 			}
 	});
+
+	//Inform the site abaut the changed login state
+	var evt = new CustomEvent("LoginStateChanged");
+	window.dispatchEvent(evt);
 }
