@@ -116,6 +116,11 @@ async function branch_g_get_joblist(){
 	return branch_try_fetch(w);
 }
 
+async function branch_g_get_clientlist(){
+	w = new WebResponse(getBranchAPIURL() + "?get=clientlist");
+	return branch_try_fetch(w);
+}
+
 async function branch_try_fetch(webresponse){
 	await webresponse.fetch_data();
 
