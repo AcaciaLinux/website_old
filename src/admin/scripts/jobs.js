@@ -65,8 +65,6 @@ async function fetch_data() {
 		return;
 	}
 
-	pkg_list = Array();
-
 	console.log(joblist.queued_jobs.length + " queued jobs");
 	document.getElementById("jobs_data").appendChild(createBreakerRow("Queued Jobs (" + joblist.queued_jobs.length + ")"));
 	for (let i = 0; i < joblist.queued_jobs.length; i++) {
