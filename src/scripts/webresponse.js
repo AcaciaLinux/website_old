@@ -17,7 +17,7 @@ class WebResponse {
     }
 
     static from_string(string) {
-        console.debug("[WebRequest] Constructing from string \"" + string + "\"");
+        console.debug("[WebResponse] Constructing from string \"" + string + "\"");
         var resp = new WebResponse("");        
         var json_string = jQuery.parseJSON(string);
 
@@ -29,14 +29,14 @@ class WebResponse {
     }
 
     async fetch_data() {
-        console.debug("[WebRequest] Sending request: \"" + this.endpoint_url + "\"");
+        console.debug("[WebResponse] Sending request: \"" + this.endpoint_url + "\"");
         const webresponse = await fetch(this.endpoint_url);
         const json_webresp = await JSON.parse(await webresponse.text());
 
         this.status = json_webresp["status"];
         this.response_code = json_webresp["response_code"];
         this.payload = json_webresp["payload"];  
-        console.debug("[WebRequest] Return status: " + this.status);
+        console.debug("[WebResponse] Return status: " + this.status);
     }
 
 }
