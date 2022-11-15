@@ -31,7 +31,7 @@ class WebResponse {
     async fetch_data() {
         console.debug("[WebRequest] Sending request: \"" + this.endpoint_url + "\"");
         const webresponse = await fetch(this.endpoint_url);
-        const json_webresp = await webresponse.json();
+        const json_webresp = await JSON.parse(await webresponse.text());
 
         this.status = json_webresp["status"];
         this.response_code = json_webresp["response_code"];
