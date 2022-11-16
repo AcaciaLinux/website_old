@@ -14,10 +14,6 @@ $(document).ready(async function() {
 	//Check if the user is still authenticated
 	branch_check_auth();
 
-	//Update the login state
-	//var evt = new CustomEvent("LoginStateChanged");
-	//window.dispatchEvent(evt);
-
 	console.log("Registering button events..");
 	register_button_events($("#content-div"));
 	show_page("#btn_overview", "sites/overview.html");
