@@ -132,5 +132,14 @@ async function branch_try_fetch(webresponse){
 }
 
 function branch_api_error(text){
-	alert("[Branch API]: " + text);
+	console.error("Branch API error: " + text);
+	
+	$("#modal_error_label").text("Branch API error");
+	$("#modal_error_body").empty();
+	$('<p>' + text + '</p>').appendTo("#modal_error_body");
+
+	var modal = new bootstrap.Modal(document.getElementById('modal_error_bd'), {
+		keyboard: true
+	});
+	modal.show();
 }
