@@ -20,6 +20,12 @@ $(document).ready(async function() {
 		return;
 	}
 
+	//Fetch clientlist
+	const clientlist = await branch_g_get_clientlist();
+	if (clientlist == null){
+		return;
+	}
+
 	packagesBuilt = packagelist.length;
 	packagesNBuilt = packagebuildlist.length - packagesBuilt;
 	jobsWaiting = joblist.queued_jobs.length;
@@ -76,4 +82,13 @@ $(document).ready(async function() {
 			}
 		}
 	});
+
+
+	$("#div_overview_section1").empty();
+	$('<h2>' + packagesBuilt + ' Packages built</h2>').appendTo("#div_overview_section1");
+	$('<h2>' + packagesNBuilt + ' Packages not built</h2>').appendTo("#div_overview_section1");
+
+	$("#div_overview_section2").empty();
+	$('<h2>' + clientlist.controllers.length + ' Controllers connected</h2>').appendTo("#div_overview_section2");
+	$('<h2>' + clientlist.buildbots.length + ' Buildbots connected</h2>').appendTo("#div_overview_section2");
 });
