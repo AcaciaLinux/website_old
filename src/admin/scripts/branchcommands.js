@@ -6,7 +6,7 @@ async function branch_submit_pkgbuild(pkgbuild){
 			const res = jQuery.parseJSON(plain_res);
 
 			if(res.status != "SUCCESS") {
-				alert("Failed to submit package build: " + res.payload);
+				branch_api_error(res.payload);
 				return;
 			}
 	}));
@@ -20,7 +20,7 @@ async function branch_crossbuild(pkgname){
 			const res = jQuery.parseJSON(plain_res);
 
 			if(res.status != "SUCCESS") {
-				alert("Failed to submit package build: " + res.payload);
+				branch_api_error(res.payload);
 				return;
 			}
 	}));
@@ -33,7 +33,7 @@ async function branch_clear_completed_jobs(){
 			const res = jQuery.parseJSON(plain_res);
 
 			if(res.status != "SUCCESS") {
-				alert("Failed to clear completed jobs: " + res.payload);
+				branch_api_error(res.payload);
 				return;
 			}
 	}));
@@ -47,7 +47,7 @@ async function branch_releasebuild(pkgname){
 			const res = jQuery.parseJSON(plain_res);
 
 			if(res.status != "SUCCESS") {
-				alert("Failed to submit package build: " + res.payload);
+				branch_api_error(res.payload);
 				return;
 			}
 	}));
@@ -61,8 +61,7 @@ async function branch_get_log(jobID){
 			res = WebResponse.from_string(plain_res);
 
 			if(res.status != "SUCCESS") {
-				alert("Failed to get build log: " + res.payload);
-				console.error("Failed to retrieve build log: " + res.payload);
+				branch_api_error(res.payload);
 				return;
 			}
 	}));
