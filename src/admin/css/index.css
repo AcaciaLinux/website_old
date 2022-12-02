@@ -1,0 +1,16 @@
+#content-div{
+	margin-left: 10px;
+	margin-right: 10px;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+}
+
+#modal_login_body{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .active{
+    background-color: rgb(18, 100, 18) !important;
+}
