@@ -1,5 +1,6 @@
 function createRow(curJob, view_log){
 	let row = document.createElement("tr");
+	row.classList.add("rm-update");
 
 	var pkgname = document.createElement("td");
 	text = document.createTextNode(curJob.build_pkg_name);
@@ -46,6 +47,7 @@ function createRow(curJob, view_log){
 
 function createBreakerRow(text){
 	let row = document.createElement("tr");
+	row.classList.add("rm-update");
 
 	var breaker = document.createElement("td");
 	breaker.setAttribute("colspan", "5");
@@ -64,6 +66,8 @@ async function fetch_data() {
 	if (joblist == null){
 		return;
 	}
+
+	$(".rm-update").remove();
 
 	console.log(joblist.queued_jobs.length + " queued jobs");
 	document.getElementById("jobs_data").appendChild(createBreakerRow("Queued Jobs (" + joblist.queued_jobs.length + ")"));
@@ -116,3 +120,7 @@ async function f_viewLog(jobID){
 }
 
 fetch_data();
+
+setInterval(function(){
+	fetch_data();
+}, 5000);
