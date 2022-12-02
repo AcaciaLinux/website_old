@@ -69,10 +69,7 @@ async function branch_get_log(jobID){
 
 async function branch_check_auth(){
 	let oldkey = getCookie("branch_authkey");
-	if (oldkey){
-		console.debug("Checking saved authkey: " + oldkey)
-	} else {
-		console.debug("No previous authkey");
+	if (!oldkey){
 		cur_authkey = "";
 	}
 
@@ -82,11 +79,11 @@ async function branch_check_auth(){
 			const res = jQuery.parseJSON(plain_res);
 
 			if(res.status == "SUCCESS") {
-				console.debug("Reusing old authkey, still valid");
+				console.debug("Reusing old authkey " + oldkey + ", still valid");
 				cur_authkey = oldkey;
 				setCookie("branch_authkey", cur_authkey, 1);
 			} else {
-				console.debug("Old authkey is invalid: " + res.payload);
+				console.debug("Old authkey " + oldkey + " is invalid: " + res.payload);
 			}
 	});
 
