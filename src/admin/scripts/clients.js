@@ -1,5 +1,6 @@
 function createRow(clientName){
 	let row = document.createElement("tr");
+	row.classList.add("rm-update");
 
 	var cName = document.createElement("td");
 	text = document.createTextNode(clientName);
@@ -12,6 +13,7 @@ function createRow(clientName){
 
 function createBreakerRow(text){
 	let row = document.createElement("tr");
+	row.classList.add("rm-update");
 
 	var breaker = document.createElement("td");
 	breaker.setAttribute("colspan", "1");
@@ -25,11 +27,13 @@ function createBreakerRow(text){
 	return row;
 }
 
-async function fetch_data() {
+async function clients_fetch_data() {
 	const clientList = await branch_g_get_clientlist();
 	if (clientList == null){
 		return;
 	}
+
+	$(".rm-update").remove();
 
 	console.log(clientList.controllers.length + " controller clients");
 	document.getElementById("clients_data").appendChild(createBreakerRow("Controllers (" + clientList.controllers.length + ")"));
@@ -46,4 +50,8 @@ async function fetch_data() {
 	}
 }
 
-fetch_data();
+clients_fetch_data();
+
+setInterval(function(){
+	clients_fetch_data();
+}, 5000);
