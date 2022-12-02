@@ -27,7 +27,7 @@ function createBreakerRow(text){
 	return row;
 }
 
-async function clients_fetch_data() {
+async function fetch_data() {
 	const clientList = await branch_g_get_clientlist();
 	if (clientList == null){
 		return;
@@ -50,8 +50,4 @@ async function clients_fetch_data() {
 	}
 }
 
-clients_fetch_data();
-
-setInterval(function(){
-	clients_fetch_data();
-}, 5000);
+fetch_data();
