@@ -20,6 +20,12 @@ $(document).ready(async function() {
 });
 
 async function show_page(btn, source_file){
+	//clearInterval();
+	//branch_check_auth();
+	/*setInterval(function(){
+		//Check if the user is still authenticated
+		branch_check_auth();
+	}, 30000);*/
 	$("#navbar").collapse("hide");
 	disable_all_active_buttons();
 	$(btn).addClass("active");
@@ -101,3 +107,11 @@ setInterval(function(){
 	//Check if the user is still authenticated
 	branch_check_auth();
 }, 30000);
+
+setInterval(function(){
+	try {
+		fetch_data();
+	} catch (err){
+		
+	}
+}, 5000);
