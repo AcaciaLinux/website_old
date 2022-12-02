@@ -119,7 +119,16 @@ async function f_viewLog(jobID){
 	modal.show();
 }
 
+function jobs_check_enable_buttons(){
+	$("#btn_clear_completed").prop("disabled", cur_authkey == "");
+}
+
+jobs_check_enable_buttons();
 jobs_fetch_data();
+
+window.addEventListener("LoginStateChanged", function(){
+	jobs_check_enable_buttons();
+});
 
 $("#btn_clear_completed").click(async function(){
 	await branch_clear_completed_jobs();
