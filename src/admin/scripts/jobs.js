@@ -61,7 +61,7 @@ function createBreakerRow(text){
 	return row;
 }
 
-async function fetch_data() {
+async function jobs_fetch_data() {
 	const joblist = await branch_g_get_joblist();
 	if (joblist == null){
 		return;
@@ -119,8 +119,8 @@ async function f_viewLog(jobID){
 	modal.show();
 }
 
-fetch_data();
+jobs_fetch_data();
 
 setInterval(function(){
-	fetch_data();
+	jobs_fetch_data();
 }, 5000);
