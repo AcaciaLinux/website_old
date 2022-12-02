@@ -61,7 +61,9 @@ function register_button_events() {
 	});
 
 	all_buttons.push($("#btn_auth"));
-	$("#btn_auth").click(function() {		
+	$("#btn_auth").click(function() {	
+		//Check if the user is still authenticated
+		branch_check_auth();	
 		if (cur_authkey == ""){
 			var modal = new bootstrap.Modal(document.getElementById('modal_login_bd'), {
 				keyboard: false
@@ -95,4 +97,7 @@ function disable_all_active_buttons() {
 	}
 }
 
-
+setInterval(function(){
+	//Check if the user is still authenticated
+	branch_check_auth();
+}, 30000);
