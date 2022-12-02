@@ -11,7 +11,7 @@ async function fetch_data() {
 		return;
 	}
 
-	pkg_list = Array();
+	$(".rm-update").remove();
 
 	pkglist = Array();
     for (let i = 0; i < packagelist.length; i++) {
@@ -23,6 +23,7 @@ async function fetch_data() {
 
 	for (let i = 0; i < packagebuildlist.length; i++) {
 		row = document.createElement("tr");
+		row.classList.add("rm-update");
 
 		var pkgname = document.createElement("td");
         text = document.createTextNode(packagebuildlist[i]);
