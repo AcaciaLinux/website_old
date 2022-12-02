@@ -61,7 +61,7 @@ function createBreakerRow(text){
 	return row;
 }
 
-async function jobs_fetch_data() {
+async function fetch_data() {
 	const joblist = await branch_g_get_joblist();
 	if (joblist == null){
 		return;
@@ -124,7 +124,7 @@ function jobs_check_enable_buttons(){
 }
 
 jobs_check_enable_buttons();
-jobs_fetch_data();
+fetch_data();
 
 window.addEventListener("LoginStateChanged", function(){
 	jobs_check_enable_buttons();
@@ -132,9 +132,5 @@ window.addEventListener("LoginStateChanged", function(){
 
 $("#btn_clear_completed").click(async function(){
 	await branch_clear_completed_jobs();
-	jobs_fetch_data();
+	fetch_data();
 });
-
-setInterval(function(){
-	jobs_fetch_data();
-}, 5000);
