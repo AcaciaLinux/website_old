@@ -121,6 +121,11 @@ async function f_viewLog(jobID){
 
 jobs_fetch_data();
 
+$("#btn_clear_completed").click(async function(){
+	await branch_clear_completed_jobs();
+	jobs_fetch_data();
+});
+
 setInterval(function(){
 	jobs_fetch_data();
 }, 5000);
