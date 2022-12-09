@@ -18,6 +18,8 @@ async function fetch_data() {
         pkglist.push(packagelist[i].name);
     }
 
+    packagebuildlist.sort((a, b) => a.localeCompare(b));
+
 	console.log(packagebuildlist.length + " package builds");
 	console.log(packagelist.length + " packages");
 
