@@ -26,8 +26,7 @@ async function fetch_data() {
     }
 
     pkgbuildlist = wr.payload;
-    console.log("Fetching packagebuildlist from branch..");
-    console.log(pkgbuildlist);
+    pkgbuildlist.sort((a, b) => a.localeCompare(b));
 
 
     for (let i = 0; i < pkgbuildlist.length; i++) {

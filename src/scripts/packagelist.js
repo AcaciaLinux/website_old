@@ -9,6 +9,7 @@ async function fetch_data() {
     }
 
     pkglist = wr.payload;
+    pkglist.sort((a, b) => a["name"].localeCompare(b["name"]));
 
     for (let i = 0; i < pkglist.length; i++) {
         row = document.createElement("tr");
